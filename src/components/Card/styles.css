@@ -1,0 +1,29 @@
+.card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    font-size: x-large;
+    background-color: transparent;
+    border: none;
+}
+
+.span {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.showBtn {
+    font-size: large;
+    font-weight: bold;
+}

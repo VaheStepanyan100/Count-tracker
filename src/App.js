@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import CardList from "./components/CardsList";
+import Report from "./components/Report";
+
+const initialData = [
+  { num: 1, isShow: true, count: 0 },
+  { num: 2, isShow: true, count: 0 },
+  { num: 3, isShow: true, count: 0 },
+  { num: 4, isShow: true, count: 0 },
+  { num: 5, isShow: true, count: 0 },
+  { num: 6, isShow: true, count: 0 },
+];
 
 function App() {
+  const [data, setData] = useState(initialData);
+  const [reportShow, setReportShow] = useState(false);
+  const [card, setCard] = useState(null);
+
+  useEffect(() => {
+    if (!card) return;
+    data[card.num - 1].count = card.count;
+    setData([...data]);
+  },[card]);
+
+  function handlReport() {
+    setReportShow(!reportShow);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <CardList
+      setCard={setCard}
+      cardsData={data}
+      onClick={handlReport}
+    />
+    {reportShow ? <Report data={data}/> : ''}
+    </>
   );
 }
 
