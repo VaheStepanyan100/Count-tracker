@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CardList from "./components/CardsList";
 import Report from "./components/Report";
 
@@ -14,13 +14,11 @@ const initialData = [
 function App() {
   const [data, setData] = useState(initialData);
   const [reportShow, setReportShow] = useState(false);
-  const [card, setCard] = useState(null);
 
-  useEffect(() => {
-    if (!card) return;
-    data[card.num - 1].count = card.count;
+  const updateReports = (num, count) => {
+    data[num - 1].count = count;
     setData([...data]);
-  },[card]);
+  }
 
   function handlReport() {
     setReportShow(!reportShow);
@@ -29,11 +27,11 @@ function App() {
   return (
     <>
     <CardList
-      setCard={setCard}
+      updateReports={updateReports}
       cardsData={data}
-      onClick={handlReport}
+      getReport={handlReport}
     />
-    {reportShow ? <Report data={data}/> : ''}
+    {reportShow ? <Report data={data} /> : ''}
     </>
   );
 }

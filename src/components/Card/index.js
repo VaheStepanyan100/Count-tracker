@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import './styles.css';
 
-export default function Card({ number, isShow, count, setCard }) {
+export default function Card({ number, isShow, count, updateReports }) {
   const [show, setShow] = useState(isShow);
 
   function handleToggle() {
     setShow(!show);
-    if(!show) {
-      setCard({ count: ++count, num: number })
+    if (!show) {
+      updateReports(number, ++count);
     }
-    
   }
 
   return (
@@ -17,10 +16,10 @@ export default function Card({ number, isShow, count, setCard }) {
       {show ?
         <>
           <span className='span'>{number}</span>
-          <button 
+          <button
             className='btn'
             onClick={handleToggle}
-            >X</button>
+          >X</button>
         </> :
         <button
           className='showBtn'
